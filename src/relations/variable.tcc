@@ -25,7 +25,7 @@
 namespace libsnark {
 
 template<typename FieldT>
-linear_term<FieldT> variable<FieldT>::operator*(const integer_coeff_t int_coeff) const
+linear_term<FieldT> variable<FieldT>::operator*(const long int_coeff) const
 {
     return linear_term<FieldT>(*this, int_coeff);
 }
@@ -66,7 +66,7 @@ bool variable<FieldT>::operator==(const variable<FieldT> &other) const
 }
 
 template<typename FieldT>
-linear_term<FieldT> operator*(const integer_coeff_t int_coeff, const variable<FieldT> &var)
+linear_term<FieldT> operator*(const long int_coeff, const variable<FieldT> &var)
 {
     return linear_term<FieldT>(var, int_coeff);
 }
@@ -78,7 +78,7 @@ linear_term<FieldT> operator*(const FieldT &field_coeff, const variable<FieldT> 
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator+(const integer_coeff_t int_coeff, const variable<FieldT> &var)
+linear_combination<FieldT> operator+(const long int_coeff, const variable<FieldT> &var)
 {
     return linear_combination<FieldT>(int_coeff) + var;
 }
@@ -90,7 +90,7 @@ linear_combination<FieldT> operator+(const FieldT &field_coeff, const variable<F
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator-(const integer_coeff_t int_coeff, const variable<FieldT> &var)
+linear_combination<FieldT> operator-(const long int_coeff, const variable<FieldT> &var)
 {
     return linear_combination<FieldT>(int_coeff) - var;
 }
@@ -108,7 +108,7 @@ linear_term<FieldT>::linear_term(const variable<FieldT> &var) :
 }
 
 template<typename FieldT>
-linear_term<FieldT>::linear_term(const variable<FieldT> &var, const integer_coeff_t int_coeff) :
+linear_term<FieldT>::linear_term(const variable<FieldT> &var, const long int_coeff) :
     index(var.index), coeff(FieldT(int_coeff))
 {
 }
@@ -120,7 +120,7 @@ linear_term<FieldT>::linear_term(const variable<FieldT> &var, const FieldT &coef
 }
 
 template<typename FieldT>
-linear_term<FieldT> linear_term<FieldT>::operator*(const integer_coeff_t int_coeff) const
+linear_term<FieldT> linear_term<FieldT>::operator*(const long int_coeff) const
 {
     return (this->operator*(FieldT(int_coeff)));
 }
@@ -132,7 +132,7 @@ linear_term<FieldT> linear_term<FieldT>::operator*(const FieldT &field_coeff) co
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator+(const integer_coeff_t int_coeff, const linear_term<FieldT> &lt)
+linear_combination<FieldT> operator+(const long int_coeff, const linear_term<FieldT> &lt)
 {
     return linear_combination<FieldT>(int_coeff) + lt;
 }
@@ -144,7 +144,7 @@ linear_combination<FieldT> operator+(const FieldT &field_coeff, const linear_ter
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator-(const integer_coeff_t int_coeff, const linear_term<FieldT> &lt)
+linear_combination<FieldT> operator-(const long int_coeff, const linear_term<FieldT> &lt)
 {
     return linear_combination<FieldT>(int_coeff) - lt;
 }
@@ -181,7 +181,7 @@ bool linear_term<FieldT>::operator==(const linear_term<FieldT> &other) const
 }
 
 template<typename FieldT>
-linear_term<FieldT> operator*(const integer_coeff_t int_coeff, const linear_term<FieldT> &lt)
+linear_term<FieldT> operator*(const long int_coeff, const linear_term<FieldT> &lt)
 {
     return FieldT(int_coeff) * lt;
 }
@@ -193,7 +193,7 @@ linear_term<FieldT> operator*(const FieldT &field_coeff, const linear_term<Field
 }
 
 template<typename FieldT>
-linear_combination<FieldT>::linear_combination(const integer_coeff_t int_coeff)
+linear_combination<FieldT>::linear_combination(const long int_coeff)
 {
     this->add_term(linear_term<FieldT>(0, int_coeff));
 }
@@ -235,7 +235,7 @@ void linear_combination<FieldT>::add_term(const variable<FieldT> &var)
 }
 
 template<typename FieldT>
-void linear_combination<FieldT>::add_term(const variable<FieldT> &var, const integer_coeff_t int_coeff)
+void linear_combination<FieldT>::add_term(const variable<FieldT> &var, const long int_coeff)
 {
     this->terms.emplace_back(linear_term<FieldT>(var.index, int_coeff));
 }
@@ -253,7 +253,7 @@ void linear_combination<FieldT>::add_term(const linear_term<FieldT> &other)
 }
 
 template<typename FieldT>
-linear_combination<FieldT> linear_combination<FieldT>::operator*(const integer_coeff_t int_coeff) const
+linear_combination<FieldT> linear_combination<FieldT>::operator*(const long int_coeff) const
 {
     return (*this) * FieldT(int_coeff);
 }
@@ -446,7 +446,7 @@ std::istream& operator>>(std::istream &in, linear_combination<FieldT> &lc)
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator*(const integer_coeff_t int_coeff, const linear_combination<FieldT> &lc)
+linear_combination<FieldT> operator*(const long int_coeff, const linear_combination<FieldT> &lc)
 {
     return lc * int_coeff;
 }
@@ -458,7 +458,7 @@ linear_combination<FieldT> operator*(const FieldT &field_coeff, const linear_com
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator+(const integer_coeff_t int_coeff, const linear_combination<FieldT> &lc)
+linear_combination<FieldT> operator+(const long int_coeff, const linear_combination<FieldT> &lc)
 {
     return linear_combination<FieldT>(int_coeff) + lc;
 }
@@ -470,7 +470,7 @@ linear_combination<FieldT> operator+(const FieldT &field_coeff, const linear_com
 }
 
 template<typename FieldT>
-linear_combination<FieldT> operator-(const integer_coeff_t int_coeff, const linear_combination<FieldT> &lc)
+linear_combination<FieldT> operator-(const long int_coeff, const linear_combination<FieldT> &lc)
 {
     return linear_combination<FieldT>(int_coeff) - lc;
 }

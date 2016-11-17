@@ -16,15 +16,13 @@
 
 namespace libsnark {
 
-typedef size_t lc_index_t;
-
 template<typename FieldT>
 class protoboard;
 
 template<typename FieldT>
 class pb_variable : public variable<FieldT> {
 public:
-    pb_variable(const var_index_t index = 0) : variable<FieldT>(index) {};
+    pb_variable(const size_t index = 0) : variable<FieldT>(index) {};
 
     void allocate(protoboard<FieldT> &pb, const std::string &annotation="");
 };
@@ -75,7 +73,7 @@ template<typename FieldT>
 class pb_linear_combination : public linear_combination<FieldT> {
 public:
     bool is_variable;
-    lc_index_t index;
+    size_t index;
 
     pb_linear_combination();
     pb_linear_combination(const pb_variable<FieldT> &var);

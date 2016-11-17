@@ -23,8 +23,8 @@ protoboard<FieldT>::protoboard()
     constraint_system.variable_annotations[0] = "ONE";
 #endif
 
-    next_free_var = 1; /* to account for constant 1 term */
-    next_free_lc = 0;
+    next_free_variable_index = 1; /* to account for constant 1 term */
+    next_free_linear_combination_index = 0;
 }
 
 template<typename FieldT>
@@ -34,24 +34,24 @@ void protoboard<FieldT>::clear_values()
 }
 
 template<typename FieldT>
-var_index_t protoboard<FieldT>::allocate_var_index(const std::string &annotation)
+size_t protoboard<FieldT>::allocate_variable_index(const std::string &annotation)
 {
 #ifdef DEBUG
     assert(annotation != "");
-    constraint_system.variable_annotations[next_free_var] = annotation;
+    constraint_system.variable_annotations[next_free_variable_index] = annotation;
 #else
     UNUSED(annotation);
 #endif
     ++constraint_system.auxiliary_input_size;
     values.emplace_back(FieldT::zero());
-    return next_free_var++;
+    return next_free_variable_index++;
 }
 
 template<typename FieldT>
-lc_index_t protoboard<FieldT>::allocate_lc_index()
+size_t protoboard<FieldT>::allocate_linear_combination_index()
 {
-    lc_values.emplace_back(FieldT::zero());
-    return next_free_lc++;
+    linear_combination_values.emplace_back(FieldT::zero());
+    return next_free_linear_combination_index++;
 }
 
 template<typename FieldT>
@@ -77,8 +77,8 @@ FieldT& protoboard<FieldT>::lc_val(const pb_linear_combination<FieldT> &lc)
     }
     else
     {
-        assert(lc.index < lc_values.size());
-        return lc_values[lc.index];
+        assert(lc.index < linear_combination_values.size());
+        return linear_combination_values[lc.index];
     }
 }
 
@@ -91,8 +91,8 @@ FieldT protoboard<FieldT>::lc_val(const pb_linear_combination<FieldT> &lc) const
     }
     else
     {
-        assert(lc.index < lc_values.size());
-        return lc_values[lc.index];
+        assert(lc.index < linear_combination_values.size());
+        return linear_combination_values[lc.index];
     }
 }
 
@@ -150,7 +150,7 @@ size_t protoboard<FieldT>::num_inputs() const
 template<typename FieldT>
 size_t protoboard<FieldT>::num_variables() const
 {
-    return next_free_var - 1;
+    return next_free_variable_index - 1;
 }
 
 template<typename FieldT>

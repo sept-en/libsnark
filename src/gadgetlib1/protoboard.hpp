@@ -30,9 +30,11 @@ class protoboard {
 private:
     FieldT constant_term; /* only here, because pb.val() needs to be able to return reference to the constant 1 term */
     r1cs_variable_assignment<FieldT> values; /* values[0] will hold the value of the first allocated variable of the protoboard, *NOT* constant 1 */
-    var_index_t next_free_var;
-    lc_index_t next_free_lc;
-    std::vector<FieldT> lc_values;
+
+    size_t next_free_variable_index;
+    size_t next_free_linear_combination_index;
+
+    std::vector<FieldT> linear_combination_values;
     r1cs_constraint_system<FieldT> constraint_system;
 
 public:
@@ -66,8 +68,8 @@ public:
     friend class pb_linear_combination<FieldT>;
 
 private:
-    var_index_t allocate_var_index(const std::string &annotation="");
-    lc_index_t allocate_lc_index();
+    size_t allocate_variable_index(const std::string &annotation="");
+    size_t allocate_linear_combination_index();
 };
 
 } // libsnark

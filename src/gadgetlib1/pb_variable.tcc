@@ -16,7 +16,7 @@ namespace libsnark {
 template<typename FieldT>
 void pb_variable<FieldT>::allocate(protoboard<FieldT> &pb, const std::string &annotation)
 {
-    this->index = pb.allocate_var_index(annotation);
+    this->index = pb.allocate_variable_index(annotation);
 }
 
 /* allocates pb_variable<FieldT> array in MSB->LSB order */
@@ -128,7 +128,7 @@ template<typename FieldT>
 void pb_linear_combination<FieldT>::assign(protoboard<FieldT> &pb, const linear_combination<FieldT> &lc)
 {
     assert(this->is_variable == false);
-    this->index = pb.allocate_lc_index();
+    this->index = pb.allocate_linear_combination_index();
     this->terms = lc.terms;
 }
 
