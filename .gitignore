@@ -2,9 +2,11 @@
 *.a
 *.so
 *.d
+*.swp
 depinst/
 depsrc/
 README.html
+tags
 doxygen/
 src/gadgetlib2/examples/tutorial
 src/gadgetlib2/tests/gadgetlib2_test
