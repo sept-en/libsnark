@@ -8,6 +8,8 @@
  *****************************************************************************/
 
 #include <gtest/gtest.h>
+#include "gadget_UTEST.cpp"
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
